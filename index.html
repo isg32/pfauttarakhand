@@ -150,7 +150,7 @@
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzYiqaWW7113OVeVOZQZEb4ddp_6lDs_AtZFV6ky4hO5P9IDEwAh4x0spFWHQj6GqxGoA/exec'; // Replace with your Google Apps Script Web App URL.
+  const scriptURL = 'https://proxy.cors.sh/https://script.google.com/macros/s/AKfycbzYiqaWW7113OVeVOZQZEb4ddp_6lDs_AtZFV6ky4hO5P9IDEwAh4x0spFWHQj6GqxGoA/exec'; // Replace with your Google Apps Script Web App URL.
 
   function startPayment() {
     const form = document.getElementById('donationForm');
@@ -181,7 +181,8 @@
             payment_id: response.razorpay_payment_id,
             amount: amount,           // Send amount
           }),
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json',
+          'x-cors-api-key': 'temp_6024f5608c16e2b812cc9451542813cb'} 
         })
           .then((res) => res.json())
           .then((data) => {

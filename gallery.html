@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Grid with Blue Overlay</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="icon" type="image/x-icon" href="logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+          
+</style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="logo.png" alt="PFA Uttarakhand Logo"/>
+        <img src="Happy Home Sanctuary Logo.png" alt="PFA Uttarakhand Logo"/>
+
+    </div>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About Us</a></li>
+          <li><a href="#efforts" class="nav-link">Our Efforts</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="adoptionpage.html" class="nav-link">Adopt</a></li>
+        </ul>
+        
+        <button id="donateBtn" class="donate-btn" onclick="openModal()">Support Us</button>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
+
+
+
+<!-- Modal Structure -->
+<div id="donationModal" class="modal">
+<div class="modal-content">
+    <h1>Make a Donation</h1>
+    <form id="donation-form">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+        <label for="amount">Donation Amount (INR)</label>
+        <input type="number" id="amount" name="amount" placeholder="Enter donation amount" required>
+
+        <button type="submit">Donate Now</button>
+    </form>
+
+    <div class="popup" id="success-message">Thank you for your donation!</div>
+    <div class="qr-code" id="qr-code">
+        <p>Scan the QR code to donate via UPI:</p>
+        <img src="QR_code_for_mobile_English_Wikipedia.svg" alt="QR Code">
+    </div>
+</div>
+</div>
+
+<div class="strip"></div>
+  
+  <div class="container">
+    <!-- Row 1 -->
+    <div class="row">
+      <div class="image-grid-gallery">
+        <img src="Gallery/Sanctury/IMG_2939.JPG" alt="Category 1 Image 1">
+        <img src="Gallery/Cat/10.JPG" alt="Category 1 Image 2">
+        <img src="Gallery/Sanctury/IMG_2934.JPG" alt="Category 1 Image 3">
+        <img src="Gallery/Cat/12.JPG" alt="Category 1 Image 4">
+      </div>
+    </div>
+    <!-- Row 2 -->
+    <div class="row">
+      <div class="image-grid-gallery">
+        <img src="Gallery/khacchar/1.JPG" alt="Category 2 Image 1">
+        <img src="slideshow/7.JPG" alt="Category 2 Image 2">
+        <img src="Gallery/Cat/11.JPG" alt="Category 2 Image 3">
+        <img src="Gallery/khacchar/7.JPG" alt="Category 2 Image 4">
+      </div>
+    </div>
+    <!-- Row 3 -->
+    <div class="row">
+      <div class="image-grid-gallery">
+        <img src="Gallery/sheep/1.JPG" alt="Category 3 Image 1">
+        <img src="Gallery/sheep/10.JPG" alt="Category 3 Image 2">
+        <img src="Gallery/sheep/5.JPG" alt="Category 3 Image 3">
+        <img src="Gallery/hen/5.JPG" alt="Category 3 Image 4">
+      </div>
+    </div>
+    <!-- Row 4 -->
+    <div class="row">
+      <div class="image-grid-gallery">
+        <img src="Gallery/hen/1.JPG" alt="Category 4 Image 1">
+        <img src="slideshow/3.JPG" alt="Category 4 Image 2">
+        <img src="Gallery/sheep/14.JPG" alt="Category 4 Image 3">
+        <img src="Gallery/hen/6.JPG" alt="Category 4 Image 4">
+      </div>
+    </div>
+    <!-- Row 5 -->
+    <div class="row">
+      <div class="image-grid-gallery">
+        <img src="Gallery/khacchar/2.JPG" alt="Category 5 Image 1">
+        <img src="slideshow/5.JPG" alt="Category 5 Image 2">
+        <img src="slideshow/4.JPG" alt="Category 5 Image 3">
+        <img src="slideshow/6.JPG" alt="Category 5 Image 4">
+      </div>
+    </div>
+  </div>
+
+
+
+  <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <img src="logofooter.jpg" alt="People For Animals Logo" class="footer-logo">
+            <p>
+               People For Animals Uttarakhand
+            </p>
+        </div>
+        <div class="footer-middle">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="gallery.html">Photo Gallery</a></li>
+                <li><a href="adoptionpage.html">Adopt</a></li>
+            
+                <li><a href="#trustee">Our Trustees</a></li>
+            </ul>
+        </div>
+        <div class="footer-right">
+            <h3>Find Us</h3>
+            <p>D4, Chandralok, Rajpur Road, Dehradun, Uttarakhand</p>
+
+            <p><i class="fa fa-envelope"></i>pfauttarakhand@gmail.com</p>
+            <h3>Social Media</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/pfaukd/" target="_blank"><i class="bi-facebook"></i></a>
+                <a href="https://twitter.com/PFAukd" target="_blank"><i class="bi-twitter"></i></a>
+                <a href="https://www.instagram.com/pfa.ukd/" target="_blank"><i class="bi-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UC-yYJkLdmMno-XZwuNPOiFw" target="_blank"><i class="bi-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>People For Animals Uttarakhand © 2022. <a href="#">Terms & Condition</a> and <a href="#">Privacy Policy</a></p>
+    </div>
+</footer>
+
+<script>
+// Toggle hamburger menu
+function toggleMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  navLinks.classList.toggle('open');
+}
+
+// Add shadow and adjust navbar height when scrolling
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('header');
+  if (window.scrollY > 0) {
+      header.classList.add('scrolled');
+  } else {
+      header.classList.remove('scrolled');
+  }
+});
+
+
+window.addEventListener('scroll', function() {
+  const header = document.querySelector('header');
+  header.classList.toggle('scrolled', window.scrollY > 0);
+});
+
+
+
+</script>
+</body>
+</html>

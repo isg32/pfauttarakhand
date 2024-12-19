@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adopt an Animal</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+          
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding and borders are included in element dimensions */
+}
+
+html, body {
+  scroll-behavior: smooth;
+  width: 100%; /* Ensure no extra width */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  margin: 0;
+  padding: 0;
+}
+
+/* Global Styles */
+body {
+  font-family: 'Roboto Flex';
+  line-height: 1; /* Improve readability */
+  width: 100%; /* Prevent overflow from body */
+}
+
+h1 h2 {
+  font-family: 'Inter';
+}
+
+/* The entire scrollbar */
+::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+/* The track (background of the scrollbar) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+}
+
+/* The handle (scroll thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: #1d58a9; /* Color of the scrollbar handle */
+  border-radius: 6px; /* Roundness of the handle */
+  border: 2px solid #f1f1f1; /* Space around the handle */
+}
+
+/* The handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color when hovered */
+}
+
+
+/* Initial hidden state for elements with the data attribute */
+[data-animate="on-scroll"] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+/* Visible state */
+[data-animate="on-scroll"].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Default header and navbar styles (already provided) */
+header {
+  position: fixed;
+  width: 80%;
+  margin-top: 30px;
+  margin-left: 10%;
+  z-index: 1000;
+  background-color: #fffffff5;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+  border-style: solid;
+  border-radius: 25px;
+  border-width: 0px;
+}
+
+.navbar {
+  position: absolute;
+  top: 50;
+  left: 0;
+  background-color: #ffffff00; /* Left to right gradient */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  transition: all 0.3s ease-in-out;
+  position: relative; /* Add this line for initial positioning */
+  z-index: 1000; /* Ensures the navbar stays on top of other elements */
+}
+
+/* Media Queries */
+
+/* For screens smaller than 1024px (tablet landscape) */
+@media (max-width: 1024px) {
+  header {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .navbar {
+    padding: 10px 15px;
+  }
+}
+
+/* For screens smaller than 768px (tablet portrait, large phones) */
+@media (max-width: 768px) {
+  header {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 15px;
+    border-radius: 15px;
+    padding: 8px;
+  }
+
+  .navbar {
+    flex-direction: column; /* Stack the items vertically */
+    align-items: flex-start;
+    padding: 8px 10px;
+  }
+}
+
+/* For screens smaller than 480px (mobile devices) */
+@media (max-width: 480px) {
+  header {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  .navbar {
+    padding: 5px 8px;
+  }
+}
+
+header.scrolled .navbar {
+  padding: 10px 20px;
+  background-color: #ffffff;
+  position: fixed; /* Fix the navbar at the top when scrolled */
+  top: 0; /* Ensures the navbar sticks to the top */
+  left: 0; /* Align it to the left edge */
+  width: 100%; /* Make sure it spans the full width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.411); /* Optional shadow for better visibility */
+}
+
+
+/* Logo container */
+.logo {
+  width: 100px;
+  display: flex;
+  gap: 10px; /* Spacing between logos */
+}
+
+
+
+/* Logo */
+.logo img {
+  width: 100px;
+}
+
+
+header.scrolled .logo img {
+  width: 70px;
+  
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #007bff;
+  font-family: 'Inter';
+  font-size: 1.2rem;
+  transition: color 0.4s;
+  background-color: #ffffff00;
+  padding: 5px 10px 5px 10px;
+  border-radius: 20px;
+}
+
+.nav-link:hover {
+  color: #ff6600;
+}
+
+.nav-link.active {
+  border-bottom: #ff6600;
+  border-width: 5px;
+  border-style: solid;
+}
+
+/* Donate Button */
+.donate-btn {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(255, 102, 0, 0.4);
+}
+
+.donate-btn:hover {
+  background-color: #ff8c00;
+  box-shadow: 0 5px 15px rgba(255, 140, 0, 0.5);
+  transform: scale(1.05);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #007bff;
+  border-radius: 2px;
+  transition: transform 0.3s;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  header {
+      width: 100%; /* Ensure the header fits the mobile screen */
+      margin: 0;
+      margin-top: 10px;
+      margin-left: 0;
+      border-radius: 0; /* Remove border-radius for a clean edge */
+  }
+
+  .navbar {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+  }
+
+  .logo img {
+      width: 80px; /* Adjust logo size for mobile */
+      transition: all 0.3s ease-in-out;
+  }
+
+  .donate-btn {
+      display: none; /* Hide the Support Us button in mobile view */
+  }
+
+  .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #ffffff;
+      width: 100%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+  }
+
+  .nav-links.open {
+      display: flex;
+  }
+
+  .nav-link {
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 10px 0;
+      width: 100%;
+  }
+
+  .hamburger {
+      display: flex;
+      gap: 5px;
+      flex-direction: column;
+      cursor: pointer;
+  }
+
+  .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: #007bff;
+      border-radius: 2px;
+      transition: transform 0.3s;
+  }
+}
+
+
+
+/* Initial hidden state for elements with the data attribute */
+[data-animate="on-scroll"] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+/* Visible state */
+[data-animate="on-scroll"].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* General Styles */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* Increased gap between sections */
+  padding: 3rem 0; /* Padding around the container */
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem 0; /* Padding for each section */
+  border-bottom: 1px solid #ddd; /* Optional: Adds a subtle divider */
+}
+
+.section:last-child {
+  border-bottom: none; /* Removes border for the last section */
+}
+
+/* Text Content */
+.text-content {
+  flex: 1;
+}
+
+.text-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2b4c7e;
+}
+
+.text-content p {
+  font-size: 1rem;
+  line-height: 1;
+  color: #333;
+}
+
+/* Image Content */
+.image-content {
+  flex: 1;
+  text-align: center;
+}
+
+.image-content img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section {
+      flex-direction: column-reverse; /* Images appear first in mobile view */
+      text-align: center; /* Center-align text content */
+  }
+
+  .text-content h2 {
+      font-size: 1.5rem;
+  }
+
+  .text-content p {
+      font-size: 0.9rem;
+  }
+}
+
+
+
+.adoption-section {
+  margin-top: 100px;
+  background-color: #ffffff;
+  background-size: cover; /* Ensures image covers the container */
+  background-repeat: no-repeat; /* Prevents tiling */
+  background-attachment: fixed; /* Makes the background image fixed */
+  animation: backgroundZoom 10s linear infinite;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5); /* Inner shadow */
+  display: flex;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  gap: 100px;
+  padding: 40px;
+  position: relative;
+}
+
+ 
+
+.content-half {
+  background-color: #fffffffa; /* Solid background for better readability */
+  color: #333; 
+  padding: 40px; /* Adjusted padding for proportional spacing */
+  border-radius: 20px;
+  border-width: 0px;
+  border-style: solid;
+  border-color: #d0d0d0;
+  max-width: 1000px; /* Set a fixed width for consistency */
+  margin: 50px auto; /* Center the content */
+  line-height: 1.2; /* Improved line height for readability */
+}
+
+.content-half h2 {
+  color: #0056b3; /* Slightly darker theme color for headers */
+  text-align: center; /* Center-align main header */
+  font-size: 2rem; /* Larger header font size */
+  margin-bottom: 20px;
+}
+
+.content-half h3 {
+  color: #007bff; 
+  font-size: 1.5rem;
+  margin-top: 30px;
+}
+
+.content-half p, .content-half ul {
+  font-size: 1rem; /* Slightly larger font for better readability */
+  text-align: justify; /* Justify text for professional appearance */
+  margin: 20px 0;
+}
+
+.content-half ul {
+  padding-left: 20px;
+  list-style: disc inside; /* Keep lists visually aligned */
+}
+
+blockquote {
+  font-size: 1.25rem; /* Adjusted font size for better focus */
+  font-style: italic;
+  color: #555;
+  border-left: 6px solid #007bff;
+  padding-left: 20px;
+  margin: 30px 0;
+  background: #f1f5fb; /* Softer background for emphasis */
+  border-radius: 10px; /* Rounded edges for a polished look */
+}
+
+a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .content-half {
+    padding: 30px; /* Adjust padding for smaller screens */
+    max-width: 95%; /* Take more width on small screens */
+  }
+  .content-half h2 {
+    font-size: 1.75rem; /* Slightly smaller font size for small screens */
+  }
+  .content-half p, .content-half ul {
+    font-size: 1rem; /* Adjusted font size for mobile readability */
+  }
+}
+
+/* Form Styling */
+.form-half {
+
+  flex: 0 0 30%;
+  background: #ffffff00;
+  padding: 25px;
+}
+.form-box {
+  background-color: rgba(0, 123, 255, 0.503); /* Blue translucent background */
+  border: 1px solid rgba(0, 123, 255, 0.2); /* Subtle blue border */
+  border-radius: 12px; /* Slightly rounded corners */
+  padding: 15px; /* Reduced padding for compactness */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 400px; /* Reduced width */
+  margin: 15px auto; /* Centered form */
+}
+
+.form-half h2 {
+  margin-bottom: 15px;
+  color: #ffffff; /* Deeper blue */
+  font-size: 24px; /* Compact font size */
+  font-weight: bold;
+  text-align: center; /* Centered title */
+}
+
+.form-half label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 13px; /* Slightly smaller font size */
+  color: #ffffff; /* Blue for consistency */
+}
+
+.form-half input,
+.form-half select {
+  width: 95%; /* Adjusted width for alignment */
+  padding: 8px 10px; /* Reduced padding */
+  margin-bottom: 10px; /* Reduced spacing */
+  border: 1px solid rgba(0, 123, 255, 0.3); /* Subtle blue border */
+  border-radius: 6px; /* Rounded corners */
+  font-size: 13px;
+  transition: border 0.3s, box-shadow 0.3s;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+}
+
+.form-half input:focus,
+.form-half select:focus {
+  border-color: #0056b3; /* Highlighted blue */
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.custom-btn {
+  display: block; /* Center the button */
+  padding: 8px 20px; /* Compact padding */
+  margin: 10px auto; /* Central alignment */
+  background: linear-gradient(145deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px; /* Slightly smaller font size */
+  font-weight: bold;
+  border-radius: 25px; /* Softer corners */
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), -1px -1px 3px rgba(255, 255, 255, 0.5);
+}
+
+.custom-btn:hover {
+  background: linear-gradient(145deg, #0056b3, #007bff);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.amount-display {
+  font-size: 16px; /* Smaller size */
+  margin: 10px 0;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center; /* Center the amount display */
+  opacity: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+}
+
+.modal-content img {
+  max-width: 150px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+.modal .close-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal .close-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .adoption-section {
+    flex-direction: column;
+  }
+
+
+  .form-half {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 20px auto;
+    width: 90%;
+  }
+
+  .custom-btn {
+    width: 100%; /* Full-width button on small screens */
+  }
+}
+
+
+.footer {
+    margin-top: 0px;
+    background-color: #1d58a9; /* Dark Blue Background */
+    color: white; /* White Font Color */
+    padding: 40px 0;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 3000px;
+    margin: 0px 0px 0px 0px;
+}
+
+.footer-left, .footer-middle, .footer-right {
+    width: 25%;
+}
+
+.footer-logo {
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.footer-left p {
+    line-height: 1.6;
+}
+
+.footer-middle h3, .footer-right h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.footer-middle ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-middle ul li {
+    margin-bottom: 10px;
+}
+
+.footer-middle ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-middle ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-right p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+    color: white;
+    font-size: 18px;
+}
+
+.social-icons a:hover {
+    color: #f0ad4e; /* Hover color for social icons */
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+.footer-bottom a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-left, .footer-middle, .footer-right {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .footer-middle ul {
+        display: inline-block;
+    }
+}
+
+/* For devices with screen width less than 480px (mobile phones) */
+@media (max-width: 480px) {
+    .footer-container {
+        padding: 0 10px;
+    }
+
+    .footer-left, .footer-middle, .footer-right {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .footer-left p {
+        font-size: 13px;
+    }
+
+    .footer-middle ul li a {
+        font-size: 13px;
+    }
+
+    .footer-right p {
+        font-size: 12px;
+    }
+
+    .social-icons a {
+        font-size: 14px;
+    }
+
+    .footer-bottom {
+        font-size: 12px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="PFA Uttarakhand Logo"/>
+            <img src="Happy Home Sanctuary Logo.png" alt="PFA Uttarakhand Logo"/>
+
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About Us</a></li>
+            <li><a href="#efforts" class="nav-link">Our Efforts</a></li>
+            <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+            <li><a href="adoptionpage.html" class="nav-link">Adopt</a></li>
+        </ul>
+        
+        
+        <button id="donateBtn" class="donate-btn" onclick="openModal()">Support Us</button>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
+
+
+
+
+  <section class="adoption-section">
+ 
+      
+    <div class="form-half">
+      <div class="form-box">
+      <h2>Care for an Animal</h2>
+      <form id="adoption-form">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" required>
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" required>
+        <label for="phone">Your Phone:</label>
+        <input type="text" id="phone" required>
+        <label for="animal">Animal to Care For:</label>
+        <select id="animal">
+          <option value="cat">Cat</option>
+          <option value="equine">Equine</option>
+          <option value="poultry_bird">Poultry Bird</option>
+          <option value="sheep_goat">Sheep and Goat</option>
+        </select>
+        <label for="duration">Care Duration:</label>
+        <select id="duration">
+          <option value="3">3 Months</option>
+          <option value="6">6 Months</option>
+          <option value="12">1 Year</option>
+        </select>
+        <div id="amount" class="amount-display"></div>
+        <button type="button" class="custom-btn" id="submit">Care Now</button>
+      </form>
+    </div>
+  </div>
+  </section>
+
+
+  
+  <section style="background-color: #ffffff;">
+  <div class="content-half">
+    <h2>Virtual Adoption: Transform Lives from Afar</h2>
+    <p>
+      Adopting an animal virtually isn't just kindness; it's a lifeline for those who can't speak for themselves. 
+    </p>
+    <p>
+      Imagine giving a neglected horse a warm bed, a hungry cat nutritious meals, or a wounded bird critical medical care—all from the comfort of your home. Virtual adoption allows you to make this difference. 
+    </p>
+    <h3>What is Virtual Adoption?</h3>
+    <p>
+      Virtual adoption enables you to financially support an animal under our care without taking it home. With flexible options—monthly, quarterly, or yearly—you can help provide food, medical care, and shelter to animals in need.
+    </p>
+    <h3>Why Choose Virtual Adoption?</h3>
+    <ul>
+      <li>Direct Impact: 100% of your donation supports food, shelter, and medical care.</li>
+      <li>Tax Benefits: Your donations are eligible for deductions under 80G.</li>
+      <li>Personal Connection: Receive regular updates, photos, and stories about your adopted animal.</li>
+    </ul>
+
+    <h3>How Does Your Support Help?</h3>
+    <p>
+      At PFA Uttarakhand, we care for a diverse range of animals: horses, mules, donkeys, cats, poultry, and goats. Each requires specialized care, and your contributions help us:
+    </p>
+    <ul>
+      <li>Provide nutritious food and clean water</li>
+      <li>Offer lifesaving medical treatments</li>
+      <li>Maintain safe and comfortable shelter</li>
+      <li>Engage animals in enriching activities</li>
+    </ul>
+    <h3>Visit Your Adopted Animal</h3>
+    <p>
+      Want to see your impact? Visit our shelter and meet the animal you've supported. Witness the life-changing difference your kindness has made. Contact us to schedule a visit.
+    </p>
+    <h3>What If My Adopted Animal is Rehomed?</h3>
+    <p>
+      If your adopted animal finds a permanent home or no longer requires support, we’ll keep you informed and help you transfer your generosity to another animal in need.
+    </p>
+
+    <p>
+      Ready to make a difference? <strong>Start your virtual adoption journey today!</strong>
+    </p>
+  </div>
+  </section>
+
+  <div class="modal" id="qr-modal">
+    <div class="modal-content">
+      <p>Please pay here:</p>
+      <img src="PFAQRcode.png" alt="QR Code">
+      <button class="close-btn" id="close-modal">Close</button>
+    </div>
+  </div>
+
+    <footer class="footer">
+      <div class="footer-container">
+          <div class="footer-left">
+              <img src="logofooter.jpg" alt="People For Animals Logo" class="footer-logo">
+              <p>
+                 People For Animals Uttarakhand
+              </p>
+          </div>
+          <div class="footer-middle">
+              <h3>Quick Links</h3>
+              <ul>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#about">About Us</a></li>
+                  <li><a href="#">Photo Gallery</a></li>
+                  <li><a href="#">Adopt</a></li>
+                  <li><a href="#">Join PFA Uttarakhand</a></li>
+                  <li><a href="#">Our Trustees</a></li>
+              </ul>
+          </div>
+          <div class="footer-right">
+              <h3>Find Us</h3>
+              <p>D4, Chandralok, Rajpur Road, Dehradun, Uttarakhand</p>
+              <p><i class="fa fa-phone"></i> +91 - 11 23719293/94</p>
+              <p><i class="fa fa-envelope"></i>pfauttarakhand@gmail.com</p>
+              <h3>Social Media</h3>
+              <div class="social-icons">
+                  <a href="https://www.facebook.com/pfaukd/" target="_blank"><i class="bi-facebook"></i></a>
+                  <a href="https://twitter.com/PFAukd" target="_blank"><i class="bi-twitter"></i></a>
+                  <a href="https://www.instagram.com/pfa.ukd/" target="_blank"><i class="bi-instagram"></i></a>
+                  <a href="https://www.youtube.com/channel/UC-yYJkLdmMno-XZwuNPOiFw" target="_blank"><i class="bi-youtube"></i></a>
+              </div>
+          </div>
+      </div>
+      <div class="footer-bottom">
+          <p>People For Animals Uttarakhand © 2022. <a href="#">Terms & Condition</a> and <a href="#">Privacy Policy</a></p>
+      </div>
+  </footer>
+
+
+  <script>
+   
+   // Selectors
+const form = document.getElementById("adoption-form");
+const animalSelect = document.getElementById("animal");
+const durationSelect = document.getElementById("duration");
+const amountDisplay = document.getElementById("amount");
+const modal = document.getElementById("qr-modal");
+const closeModal = document.getElementById("close-modal");
+const blueStrip = document.querySelector(".adoption-section");
+
+// Rates for calculating the amount
+const rates = {
+  cat: { 3: 2050, 6: 4100, 12: 8200 },
+  equine: { 3: 3566, 6: 7133, 12: 14265 },
+  poultry_bird: { 3: 437, 6: 875, 12: 1750 },
+  sheep_goat: { 3: 2580, 6: 5160, 12: 10320 }
+};
+
+// Images for dynamic background updates
+const animalImages = {
+  cat: "Gallery/Cat/12.JPG",
+  equine: "Gallery/Cat/2.JPG",
+  poultry_bird: "Gallery/hen/19.JPG",
+  sheep_goat: "Gallery/Sheep/21.JPG"
+};
+
+// Function to update the displayed amount based on dropdown values
+const updateAmount = () => {
+  const animal = animalSelect.value;
+  const duration = durationSelect.value;
+
+  if (rates[animal] && rates[animal][duration]) {
+    const amount = rates[animal][duration];
+    amountDisplay.style.opacity = 0; // Smooth transition
+    setTimeout(() => {
+      amountDisplay.textContent = `You can care for a ${animal.replace("_", " ")} for ${duration} months at ₹${amount}.`;
+      amountDisplay.style.opacity = 1;
+    }, 300);
+  } else {
+    amountDisplay.textContent = "Please select a valid animal and duration.";
+  }
+};
+
+// Function to update the background image based on the selected animal
+const updateBackground = () => {
+  const selectedAnimal = animalSelect.value;
+  if (animalImages[selectedAnimal]) {
+    blueStrip.style.backgroundImage = `url("${animalImages[selectedAnimal]}")`;
+  }
+};
+
+// Event listeners for dropdown changes
+animalSelect.addEventListener("change", () => {
+  updateAmount();
+  updateBackground();
+});
+
+durationSelect.addEventListener("change", updateAmount);
+
+// Event listener for modal display
+document.getElementById("submit").addEventListener("click", () => {
+  modal.style.display = "flex";
+});
+
+// Event listener to close the modal
+closeModal.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+// Initialize the default state on page load
+updateAmount();
+updateBackground();
+
+    // Toggle hamburger menu
+function toggleMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  navLinks.classList.toggle('open');
+}
+
+// Add shadow and adjust navbar height when scrolling
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('header');
+  if (window.scrollY > 0) {
+      header.classList.add('scrolled');
+  } else {
+      header.classList.remove('scrolled');
+  }
+});
+
+
+window.addEventListener('scroll', function() {
+  const header = document.querySelector('header');
+  header.classList.toggle('scrolled', window.scrollY > 0);
+});
+
+
+// Automatic Slideshow
+let slideIndex = 0;
+const slides = document.getElementsByClassName("slide");
+
+function showSlides() {
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 3000); // Change image every 3 seconds
+}
+
+showSlides();
+
+
+
+
+
+  </script>
+</body>
+</html>

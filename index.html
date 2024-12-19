@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- SEO Meta Tags -->
+        <title>People for Animals Uttarakhand | Compassion for Animal Welfare</title>
+        <meta name="description" content="People for Animals Uttarakhand is a pioneering NGO dedicated to animal welfare, offering no-tie sanctuary, rescue efforts, and policy work for sustainable change.">
+        <meta name="keywords" content="Animal welfare, People for Animals, animal rights, PFA Uttarakhand">
+        <meta name="author" content="People for Animals Uttarakhand">
+    
+        <!-- Open Graph Tags for Social Sharing -->
+        <meta property="og:title" content="People for Animals Uttarakhand">
+        <meta property="og:description" content="Join our mission to transform animal welfare with innovative sanctuary care, rescue efforts, and policy advocacy. Together, we can create a better world for animals.">
+        <meta property="og:image" content="banner.png">
+        <meta property="og:url" content="https://pfauttarakhand.com/">
+        <meta property="og:type" content="website">
+    
+        <!-- Twitter Card Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="People for Animals Uttarakhand | Compassion for Animal Welfare">
+        <meta name="twitter:description" content="Transforming animal welfare in Uttarakhand with innovative approaches, rescue efforts, and systemic policy change.">
+        <meta name="twitter:image" content="https://yourdomain.com/assets/images/twitter-image.jpg">
+    
+        <!-- Canonical Tag -->
+        <link rel="canonical" href="https://yourdomain.com/">
+    
+        <!-- Favicon -->
+        <link rel="icon" href="https://yourdomain.com/assets/images/favicon.ico" type="image/x-icon">
+    
+        <!-- Robots Meta Tag -->
+        <meta name="robots" content="index, follow">
+
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+            <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "People for Animals Uttarakhand",
+        "url": "https://yourdomain.com/",
+        "logo": "https://yourdomain.com/assets/images/logo.png",
+        "description": "Dedicated to creating compassionate and sustainable solutions for animal welfare in Uttarakhand and beyond.",
+        "foundingDate": "2012",
+        "founder": "People for Animals Uttarakhand",
+        "sameAs": [
+          "https://www.facebook.com/yourpage",
+          "https://twitter.com/yourhandle",
+          "https://instagram.com/yourhandle"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Uttarakhand",
+          "addressCountry": "IN"
+        }
+      }
+      </script>
+    <title>People For Animals Uttarakhand</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="logo.png">
+   
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+              
+    </style>
+    <script type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+     (function(){
+        emailjs.init({
+          publicKey: "9aD2_jgYjXDLVfUU1",
+        });
+     })();
+  </script>
+  <script>
+    function sendMail(){
+  let parms = {
+    firstName : document.getElementById("firstName").value,
+    lastName : document.getElementById("lastName").value,
+    email : document.getElementById("emailfrom").value,
+    message : document.getElementById("message").value,
+    contact :  document.getElementById("contact").value,
+  }
+  console.log(parms)
+  emailjs.send("service_83s9kgt","template_bhqzqms",parms).then(alert("Email Send Successfully!")).catch((error) => alert(`Failed to send email: ${error}`));
+}
+  </script>
+</head>
+
+<body>
+    
+  <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.png" alt="PFA Uttarakhand Logo"/>
+                <img src="Happy Home Sanctuary Logo.png" alt="PFA Uttarakhand Logo"/>
+
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#efforts" class="nav-link">Our Efforts</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="adoptionpage.html" class="nav-link">Adopt</a></li>
+            </ul>
+            
+            <button id="donateBtn" class="donate-btn" onclick="openModal()">Support Us</button>
+
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+    
+
+
+<!-- Modal Structure -->
+<div id="donationModal" class="modal">
+  <div class="modal-content">
+      <h1>Make a Donation</h1>
+      <form id="donationForm">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+          <label for="amount">Donation Amount (INR)</label>
+          <input type="number" id="amount" name="amount" placeholder="Enter donation amount" required>
+
+          <button type="button" onclick="startPayment()">Donate Now</button>
+      </form>
+
+      <!-- Success Message Popup -->
+      <div class="popup" id="success-message" style="display:none;">Thank you for your donation!</div>
+  </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzYiqaWW7113OVeVOZQZEb4ddp_6lDs_AtZFV6ky4hO5P9IDEwAh4x0spFWHQj6GqxGoA/exec'; // Replace with your Google Apps Script Web App URL.
+
+  function startPayment() {
+    const form = document.getElementById('donationForm');
+    const name = form.name.value;
+    const phone = form.phone.value;
+    const email = form.email.value;
+    const amount = form.amount.value;
+    
+    if (!name || !phone || !email || !amount) {
+      alert('Please fill out all fields!');
+      return;
+    }
+
+    const options = {
+      key: 'rzp_live_lfBTl10V1FalHU', // Replace with your Razorpay Key ID
+      amount: 100 * amount, // Amount in paisa (e.g., ₹100)
+      currency: 'INR',
+      name: 'Donation',
+      description: 'Thank you for your generosity',
+      handler: function (response) {
+        // Call Google Apps Script on successful payment
+        fetch(scriptURL, {
+          method: 'POST',
+          body: JSON.stringify({
+            name,
+            phone,
+            email,
+            payment_id: response.razorpay_payment_id,
+            amount: amount,           // Send amount
+          }),
+          headers: { 'Content-Type': 'application/json' },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              // Show the success message popup
+              document.getElementById('success-message').style.display = 'block';
+              // Optionally, hide the form if donation is successful
+              document.getElementById('donationForm').reset();
+            } else {
+              alert('Failed to record donation. Please contact support.');
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            alert('Error recording donation. Please contact support.');
+          });
+      },
+      prefill: {
+        name,
+        email,
+        contact: phone,
+      },
+      theme: {
+        color: '#F37254',
+      },
+    };
+
+    const razorpay = new Razorpay(options);
+    razorpay.open();
+  }
+
+  // To open the modal
+  function openModal() {
+    document.getElementById('donationModal').style.display = 'block';
+  }
+
+  // To close the modal
+  function closeModal() {
+    document.getElementById('donationModal').style.display = 'none';
+  }
+
+  // Optional: Close the modal when clicking outside of it
+  window.onclick = function(event) {
+    if (event.target === document.getElementById('donationModal')) {
+      closeModal();
+    }
+  }
+</script>
+
+
+
+<!-- Banner Section with Slideshow -->
+<section class="banner" id="banner">
+    <div class="slide-container">
+        <!-- Slide 1 -->
+        <div class="slide fade">
+            <div class="banner-content">
+                <h1>Compassion in Action: Protecting Lives, Creating Change</h1>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide fade">
+            <div class="banner-content">
+              <h1>Compassion in Action: Protecting Lives, Creating Change</h1>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide fade">
+            <div class="banner-content">
+              <h1>Compassion in Action: Protecting Lives, Creating Change</h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    
+
+
+<section class="about-us" id="about">
+    
+    <div class="container">
+        <h2>About Us</h2>
+        <!-- About Us Section -->
+        <div class="section" id="about-section">
+            <div class="image-content">
+                <img src="aboutus.jpeg" alt="About Us Image" />
+            </div>
+            <div class="text-content">
+                
+                <p>
+                  Founded in 2012, People for Animals Uttarakhand is dedicated to creating compassionate and sustainable solutions for animal welfare in Uttarakhand and beyond. We stand at the forefront of animal care with our state-of-the-art no-tie sanctuary – a pioneering approach that redefines compassion and rehabilitation. Beyond our sanctuary, we strategically work to create systemic change by developing evidence-based policies, training the next generation of animal welfare leaders, and collaborating with government agencies to ensure animals are treated with respect and dignity.
+                </p>
+
+                <p>
+                  Join our mission to transform animal welfare. Whether you want to support our rescue efforts, volunteer at our sanctuary, contribute to our policy work, or spread awareness, there's a meaningful way for you to make a difference. Together, we can build a world where animals live safely, free from harm and suffering.
+                </p>
+
+
+            </div>
+        </div>
+
+       
+    </div>
+</section>
+
+
+<section class="compact-blue-box">
+    <div class="content-box">
+      <h3>Our Mission</h3>
+      <p>
+ Our mission is to transform the landscape of animal welfare by addressing the root causes of animal suffering. Through comprehensive sanctuary care, collaborative policy work with the government, training of animal welfare professionals, we are building a world where every animal is recognised as a living being deserving of dignity, safety, and respect.
+      </p>
+    </div>
+    <div class="content-box">
+      <h3>Our Vision</h3>
+      <p>
+        We aspire to create a future where animals are not just protected, but truly valued. A future where compassion drives policy, where every animal has a chance to live free from suffering, and where human-animal coexistence is built on mutual understanding and care.
+      </p>
+    </div>
+  </section>
+  
+  
+<section class="video-section">
+    <div class="content-left">
+      <h2>A Glimpse Into Life At The Happy Home Sanctuary</h2>
+      <div class="video-container">
+        <div class="video-thumbnail">
+          <img src="Capture.PNG" alt="Video Thumbnail" />
+          <button class="play-button">
+            <img src="play.png" alt="Play Icon">
+          </button>
+        </div>
+        <video class="video" src="People for Animals Charba.mp4" controls poster="thumbnail.PNG"></video>
+      </div>
+    </div>
+    <div class="content-right">
+      <div class="image-grid">
+        <img src="Gallery/Cat/10.JPG" alt="Image 1">
+        <img src="Gallery/khacchar/11.JPG" alt="Image 2">
+        <img src="Gallery/cat/3.JPG" alt="Image 3">
+        <img src="Gallery/sheep/1.JPG" alt="Image 4">
+    </div>
+    <a class="view-gallery-btn" href="gallery.html">View Gallery</a>
+    </div>
+  </section>
+  
+
+
+<div class="our-efforts-container" id="efforts">
+  <h2 class="our-efforts-heading">Our Efforts</h2>
+  <div class="tabs-container">
+    <ul class="tabs">
+      <li class="tab active" data-target="#effort1">Happy Home Sanctuary</li>
+      <li class="tab" data-target="#effort2">Ahimsa Fellowship</li>
+      <li class="tab" data-target="#effort3">Capacity Building</li>
+      <li class="tab" data-target="#effort4">Government Collaborations</li>
+      <li class="tab" data-target="#effort5">Responsible Sourcing</li>
+      <li class="tab" data-target="#effort6">Producer Engagement</li>
+      <li class="tab" data-target="#effort7">Community Support</li>
+    </ul>
+    <div class="tab-content-container">
+        <div id="effort1" class="tab-content active">
+          <div class="image-wrapper">
+            <img src="efforts/sanctuary.JPG">
+          </div>
+          <div class="text-content">
+            <h3>Discover Happy Home Sanctuary: A Haven for Rescued Animals in Uttarakhand</h3>
+            <p>Located in the peaceful village of <strong>Chharba</strong> in Dehradun District, <strong>Happy Home Sanctuary</strong> is a unique <strong>No-Tie, No-Cage Sanctuary</strong> operated by <strong>People for Animals Uttarakhand</strong>. Our sanctuary provides a safe, stress-free environment for animals rescued from cruelty, including felines, equines, poultry birds, and goats. As Uttarakhand’s only sanctuary focused on <strong>feline and equine rescue</strong>, we are committed to giving these animals compassionate care, housing, and treatment. Supported by grants from organizations like <strong>Oil and Natural Gas Corporation</strong> and <strong>India Infrastructure Finance Company Limited</strong>, we work tirelessly to ensure our residents thrive in a dignified, cruelty-free environment.</p>
+          </div>
+        </div>
+      
+        <div id="effort2" class="tab-content">
+          <div class="image-wrapper">
+            <img src="efforts/ahimsa.png" alt="Ahimsa Fellowship">
+          </div>
+          <div class="text-content">
+            <h3>Ahimsa Fellowship: Empowering the Next Generation of Animal Protection Leaders</h3>
+            <p>The <strong>Ahimsa Fellowship</strong> is India’s first fellowship of its kind, aimed at transforming passionate individuals into skilled animal protection professionals. Over the course of <strong>eight months</strong>, fellows undergo rigorous training to develop the knowledge and tools necessary for impactful policy development, advocacy, and hands-on reforms in animal welfare.</p>
+            <p>This fellowship equips the next generation of leaders to create lasting change for animals. <a href="https://ahimsafellowship.org/" target="_blank">Visit Website</a>.</p>
+          </div>
+        </div>
+      
+        <div id="effort3" class="tab-content">
+          <div class="image-wrapper">
+            <img src="efforts/govtcollab.PNG" alt="Empowering Stakeholders for Better Animal Welfare">
+          </div>
+          <div class="text-content">
+            <h3>Empowering Stakeholders for Better Animal Welfare</h3>
+            <p>At <strong>People for Animals Uttarakhand</strong>, we recognize the crucial role that government departments play in animal welfare. Through our targeted <strong>capacity-building programs</strong>, we empower judicial officers, law enforcement agencies, and key departments such as the <strong>Animal Husbandry Department</strong>, Government Veterinary Departments, Pollution Control Boards, and Public Prosecutors. These programs focus on strengthening knowledge of <strong>animal welfare laws</strong>, ensuring that stakeholders are equipped to handle animal-related situations effectively and with compassion.</p>
+            <p>By building the capacity of these key players, we aim to create a more responsive, informed, and compassionate approach to animal welfare across Uttarakhand.<a href="https://pfappf.com/capacity-building/" target="_blank"> Visit Website</a>.</p></p>
+          </div>
+        </div>
+      
+        <div id="effort4" class="tab-content">
+          <div class="image-wrapper">
+            <img src="efforts/govtcollab2.jpeg" alt="Strengthening Animal Welfare Through Government Partnerships">
+          </div>
+          <div class="text-content">
+            <h3>Strengthening Animal Welfare Through Government Partnerships</h3>
+            <p><strong>People for Animals Uttarakhand</strong> collaborates with key organizations like the Society for Prevention of Cruelty to Animals (SPCA) in Rudraprayag and Jammu, as well as the Municipal Corporations of Dehradun and Haldwani. These partnerships are instrumental in providing safe housing for rescued animals. We also manage the infirmary at SPCA Rudraprayag, where we focus on rescuing and rehabilitating abused equines, particularly those seized from the Kedarnath Yatra track.</p>
+            <p>Through these collaborations, we aim to create a broader, more effective impact on animal welfare across various regions in Uttarakhand.</p>
+          </div>
+        </div>
+      
+        <div id="effort5" class="tab-content">
+          <div class="image-wrapper">
+            <img src="efforts/sourcing.PNG" alt="Encouraging Ethical and Responsible Sourcing">
+          </div>
+          <div class="text-content">
+            <h3>Encouraging Ethical and Responsible Sourcing</h3>
+            <p>At <strong>People for Animals Uttarakhand</strong>, we believe that corporations have the power to transform the future of animals through responsible sourcing. We work closely with corporates to promote <strong>ethical supply chains</strong> that prioritize animal welfare and ensure businesses operate in harmony with nature. By supporting sustainable choices, we help companies create a positive impact on both the environment and animal welfare.</p>
+            <p>Join us in making ethical sourcing a key part of your business, for a more compassionate future.</p>
+          </div>
+        </div>
+      
+        <div id="effort6" class="tab-content">
+          <div class="image-wrapper">
+            <img src="efforts/producers.PNG" alt="Transforming Animal Product Production: Empowering Producers for Ethical Practices">
+          </div>
+          <div class="text-content">
+            <h3>Transforming Animal Product Production: Empowering Producers for Ethical Practices</h3>
+            <p>At <strong>People for Animals Uttarakhand</strong>, we recognize that producers of animal products play a vital role in ensuring animal welfare. We work closely with producers and government agencies to provide essential <strong>education, sensitization, and skill development</strong>, enabling them to adopt traditional rearing practices that can be scaled for commercial production without compromising the well-being of animals.</p>
+            <p>Our goal is to empower farmers and producers to make ethical, sustainable choices that ensure <strong>animal welfare</strong> and contribute to responsible production. By fostering these practices, we aim to create a future where animal products are produced with compassion and care.</p>
+          </div>
+        </div>
+      
+        <div id="effort7" class="tab-content">
+          <div class="image-wrapper">
+            <img src="efforts/communitysupport.jpeg" alt="Supporting Communities in Times of Crisis: Together for Animal Welfare">
+          </div>
+          <div class="text-content">
+            <h3>Supporting Communities in Times of Crisis: Together for Animal Welfare</h3>
+            <p>At <strong>People for Animals Uttarakhand</strong>, we are committed to supporting animal welfare organizations and individuals who step up during critical times, such as floods or heat waves. We provide essential <strong>food</strong> and <strong>medical aid</strong> to those on the front lines, ensuring that animals in distress receive the care they need during emergencies.</p>
+            <p>Our efforts aim to strengthen the collective response to animal welfare crises, making a difference when it matters most.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Add more tabs similarly -->
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+        <section class="recognition-section" id="awards">
+            <div class="recognition-container">
+              <h2 >Awards And Recognition</h2>
+
+                
+                <div class="awards">
+                    <div class="award">
+                        <h3>Animal Welfare Board of India</h3>
+                        <p>Recognized as a leading animal welfare organization by the Animal Welfare Board of India for our ongoing contributions to animal protection.</p>
+                      </div>
+                      
+                    
+                    <div class="award">
+                        
+                        <h3>Kedarnath Disaster Response</h3>
+                        <p>Acknowledged by the Government of Uttarakhand for our critical role in providing relief to animals during the Kedarnath disaster.</p>
+                    </div>
+                    
+                    <div class="award">
+                        
+                        <h3>Economic Times Champions of Rural Markets</h3>
+                        <p>Honored for our efforts in preventing animal sacrifice in Uttarakhand and promoting humane alternatives.</p>
+                    </div>
+              
+        
+              
+                    <div class="award">
+                        
+                        <h3>Nari Shakti Puraskar 2017</h3>
+                        <p>Awarded to our Member Secretary for outstanding contributions to women's empowerment in animal welfare initiatives.</p>
+                    </div>
+                    
+                    <div class="award">
+                       
+                        <h3>Outstanding Animal Protection Award 2018</h3>
+                        <p>Presented by Humane Society International for our unwavering commitment to animal welfare and protection.</p>
+                    </div>
+                    
+                    <div class="award">
+                    
+                        <h3>Lush Award 2017</h3>
+                        <p>Recognized in London for our innovative and compassionate approaches to animal welfare and protection.</p>
+                    </div>
+                
+            </div>
+        </section>
+        
+
+
+
+
+        <section class="patron-section">
+            <div class="patron-container">
+                <div class="patron-image" aria-label="Portrait of Ruskin Bond"></div>
+                <div class="patron-content">
+                    <h2 class="patron-heading">Our Beloved Patron: <br>Shree Ruskin Bond</h2>
+                    <p class="patron-paragraph">
+                        Ruskin Bond, an eminent author and environmental enthusiast, is a cherished patron of People for Animals. His support and guidance inspire us in our mission of animal welfare and conservation. Through his impactful words and enduring love for nature, he has touched countless lives and kindled a spirit of compassion for animals everywhere.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+
+        <h2 class="our-efforts-heading">Our Board of Trustees</h2>
+
+<div id="trustee" class="trustees-container">
+    
+    <div class="trustee-card">
+        <img src="TRUSTEES PHOTOS/Rakesh Oberoi.png" alt="Trustee 1">
+        <div class="trustee-info">
+            <h3 class="trustee-name">Mr. Rakesh Oberoi</h3>
+            <p class="trustee-designation">Chairperson</p>
+   
+        </div>
+    </div>
+
+    <!-- Repeat for each trustee -->
+    <div class="trustee-card">
+        <img src="TRUSTEES PHOTOS/Manu Sabarwal.png" alt="Trustee 2">
+        <div class="trustee-info">
+            <h3 class="trustee-name">Mr. Manu Sabharwal</h3>
+            <p class="trustee-designation">Treasurer</p>
+        </div>
+    </div>
+
+
+    <div class="trustee-card">
+        <img src="TRUSTEES PHOTOS/Gauri.png" alt="Trustee 2">
+        <div class="trustee-info">
+            <h3 class="trustee-name">Ms. Gauri Maulekhi</h3>
+            <p class="trustee-designation">Member Secretary</p>
+        </div>
+    </div>
+
+    <div class="trustee-card">
+        <img src="TRUSTEES PHOTOS/Sidharth Luthra PHOTO.png" alt="Trustee 1">
+        <div class="trustee-info">
+            <h3 class="trustee-name">Sr. Adv. Siddharth Luthra</h3>
+            <p class="trustee-designation">Our Trustee</p>
+        </div>
+    </div>
+
+    <!-- Repeat for each trustee -->
+    <div class="trustee-card">
+        <img src="TRUSTEES PHOTOS/Victor (1).png" alt="Trustee 2">
+        <div class="trustee-info">
+            <h3 class="trustee-name">Mr. Victor Banerjee </h3>
+            <p class="trustee-designation">Our Trustee</p>
+        </div>
+    </div>
+
+
+    <div class="trustee-card">
+        <img src="TRUSTEES PHOTOS/Anjali.png" alt="Trustee 2">
+        <div class="trustee-info">
+            <h3 class="trustee-name">Ms. Anjali Nauriyal</h3>
+            <p class="trustee-designation">Our Trustee</p> 
+        </div>
+    </div>
+    
+
+    <!-- Repeat for the remaining trustees -->
+</div>
+
+
+
+
+<section class="adopt-section">
+
+  <div class="adopt-content">
+    <h2 class="adopt-heading">Virtually Adopt an Animal Today</h2>
+    <p class="adopt-paragraph">
+      Help us provide nutritious meals and essential care by sponsoring an animal.
+    </p>
+</div>
+  <div class="animal-cards">
+      <div class="adopt-card">
+          <img src="Gallery/Cat/1.JPG" alt="Donkey">
+          <a class="adopt-button" href="adoptionpage.html">Adopt A Cat</a>
+      </div>
+      <div class="adopt-card">
+          <img src="Gallery/khacchar/11.JPG" alt="Dog">
+          <a class="adopt-button" href="adoptionpage.html">Adopt An Equine</a>
+      </div>
+      <div class="adopt-card">
+          <img src="Gallery/hen/3.JPG" alt="Horse">
+          <a class="adopt-button" href="adoptionpage.html">Adopt A Hen</a>
+      </div>
+
+      <div class="adopt-card">
+        <img src="Gallery/sheep/13.JPG" alt="Horse">
+        <a class="adopt-button" href="adoptionpage.html">Adopt A Goat or Sheep</a>
+    </div>
+  </div>
+</section>
+
+<div class="thin-strip">
+  Avail 80G benefit by supporting us
+</div>
+<section class="contact-section">
+    <div class="contact-box">
+      <h2>Send us a Message</h2>
+      <form id="contactForm" method="POST">
+        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+        <input type="email" id="emailfrom" name="email" placeholder="Email" required>
+        <input type="tel" id="contact" name="contact" placeholder="Contact" required>
+        <textarea name="message" id="message" rows="4" placeholder="Your Message" required></textarea>
+        <button type="button" onclick="sendMail()">Send</button>
+      </form>
+      
+      <div class="thank-you-message" id="thankYouMessage">
+        Thanks for reaching out! You will soon hear from us.
+      </div>
+    </div>
+  </section>
+  
+
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <img src="logo.png" alt="People For Animals Logo" class="footer-logo">
+            <p>
+               People For Animals Uttarakhand
+            </p>
+        </div>
+        <div class="footer-middle">
+            <h3>Quick Links</h3>
+            <ul>
+             <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="gallery.html">Photo Gallery</a></li>
+                <li><a href="adoptionpage.html">Adopt</a></li>   
+            
+                <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-right">
+            <h3>Find Us</h3>
+            <p>D4, Chandralok, Rajpur Road, Dehradun, Uttarakhand</p>
+
+            <p><i class="fa fa-envelope"></i>pfauttarakhand@gmail.com</p>
+            <h3>Social Media</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/pfaukd/" target="_blank"><i class="bi-facebook"></i></a>
+                <a href="https://twitter.com/PFAukd" target="_blank"><i class="bi-twitter"></i></a>
+                <a href="https://www.instagram.com/pfa.ukd/" target="_blank"><i class="bi-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UC-yYJkLdmMno-XZwuNPOiFw" target="_blank"><i class="bi-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>People For Animals Uttarakhand © 2022. <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+</footer>
+
+<script src="script.js">
+
+</script>
+</body>
+</html>

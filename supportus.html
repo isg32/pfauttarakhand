@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation Form</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    
+  <h1>Donation Form</h1>
+  <form id="donationForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required><br><br>
+    
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="email">Donation Amount:</label>
+    <input type="number" id="amount" name="amount" required><br><br>
+    
+    <button type="button" onclick="startPayment()">Donate</button>
+  </form>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzYiqaWW7113OVeVOZQZEb4ddp_6lDs_AtZFV6ky4hO5P9IDEwAh4x0spFWHQj6GqxGoA/exec'; // Replace with your Google Apps Script Web App URL.
+
+    function startPayment() {
+      const form = document.getElementById('donationForm');
+      const name = form.name.value;
+      const phone = form.phone.value;
+      const email = form.email.value;
+      const amount = form.amount.value;
+      
+      if (!name || !phone || !email) {
+        alert('Please fill out all fields!');
+        return;
+      }
+
+      const options = {
+        key: 'rzp_live_lfBTl10V1FalHU', // Replace with your Razorpay Key ID
+        amount: 100 * amount, // Amount in paisa (e.g., ₹100)
+        currency: 'INR',
+        name: 'Donation',
+        description: 'Thank you for your generosity',
+        handler: function (response) {
+          // Call Google Apps Script on successful payment
+          fetch(scriptURL, {
+            method: 'POST',
+            body: JSON.stringify({
+              name,
+              phone,
+              email,
+              payment_id: response.razorpay_payment_id,
+              amount: amount,           // Send amount
+            }),
+            headers: { 'Content-Type': 'application/json' },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.success) {
+                alert('Thank you for your donation!');
+              } else {
+                alert('Failed to record donation. Please contact support.');
+              }
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              alert('Error recording donation. Please contact support.');
+            });
+        },
+        prefill: {
+          name,
+          email,
+          contact: phone,
+        },
+        theme: {
+          color: '#F37254',
+        },
+      };
+
+      const razorpay = new Razorpay(options);
+      razorpay.open();
+    }
+  </script>
+</body>
+</html>
